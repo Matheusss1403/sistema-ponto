@@ -13,11 +13,23 @@ public class RegistroPonto
 
     public TimeSpan? CalcularHorasTrabalhadas()
     {
-        if (!HoraEntradaManha.HasValue || !HoraSaidaTarde.HasValue)
-            return null;
+        var horasManha = TimeSpan.Zero;
+        var horasTarde = TimeSpan.Zero;
 
-        var horasManha = HoraSaidaManha.HasValue ? HoraSaidaManha.Value - HoraEntradaManha.Value : TimeSpan.Zero;
-        var horasTarde = HoraSaidaTarde.HasValue ? HoraSaidaTarde.Value - HoraEntradaTarde.Value : TimeSpan.Zero;
+        if (HoraEntradaManha.HasValue && HoraSaidaManha.HasValue && !HoraEntradaTarde.HasValue && !HoraSaidaTarde.HasValue)
+        {
+            horasManha = HoraSaidaManha.HasValue ? HoraSaidaManha.Value - HoraEntradaManha.Value : TimeSpan.Zero;
+            return horasManha;
+        }
+
+        if (HoraEntradaTarde.HasValue && HoraSaidaTarde.HasValue && !HoraEntradaManha.HasValue && !HoraSaidaManha.HasValue)
+        {
+            horasTarde = HoraSaidaTarde.HasValue ? HoraSaidaTarde.Value - HoraEntradaTarde.Value : TimeSpan.Zero;
+            return horasTarde;
+        }
+
+        horasManha = HoraSaidaManha.HasValue ? HoraSaidaManha.Value - HoraEntradaManha.Value : TimeSpan.Zero;
+        horasTarde = HoraSaidaTarde.HasValue ? HoraSaidaTarde.Value - HoraEntradaTarde.Value : TimeSpan.Zero;
 
         return horasManha + horasTarde;
     }

@@ -182,9 +182,9 @@ public partial class RelatorioForm : Form
         var horasNormais = Math.Min(totalHoras, 220);
         var horasExtras = Math.Max(0, totalHoras - 220);
 
-        lblTotalHoras.Text = $"Total: {TimeSpan.FromHours(totalHoras):hh\\:mm}";
-        lblHorasNormais.Text = $"Normais: {TimeSpan.FromHours(horasNormais):hh\\:mm}";
-        lblHorasExtras.Text = $"Extras: {TimeSpan.FromHours(horasExtras):hh\\:mm}";
+        lblTotalHoras.Text = $"Total: {totalHoras:F2}";
+        lblHorasNormais.Text = $"Normais: {horasNormais:F2}";
+        lblHorasExtras.Text = $"Extras: {horasExtras:F2}";
 
         // Configurar cabeçalho
         lblNome.Text = _usuario.Nome;
